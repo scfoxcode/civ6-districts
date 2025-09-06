@@ -27,17 +27,38 @@ export const TileGrid: React.FC<TileGridProps> = (props) => {
     return (
         <div>
             <div className="tile_grid_row">
-                <TileSlot img_src={tile_data[0]?.thumbnail} size={tile_size}/>
-                <TileSlot img_src={tile_data[1]?.thumbnail} size={tile_size}/>
+                <TileSlot 
+                    index={0}
+                    img_src={tile_data[0]?.thumbnail}
+                    size={tile_size}/>
+                <TileSlot 
+                    index={1}
+                    img_src={tile_data[1]?.thumbnail}
+                    size={tile_size}/>
             </div>
             <div className="tile_grid_row">
-                <TileSlot img_src={tile_data[2]?.thumbnail} size={tile_size}/>
-                <TileSlot img_src={tile_data[3]?.thumbnail} size={tile_size}/>
-                <TileSlot img_src={tile_data[4]?.thumbnail} size={tile_size}/>
+                <TileSlot 
+                    index={2}
+                    img_src={tile_data[2]?.thumbnail}
+                    size={tile_size}/>
+                <TileSlot 
+                    index={3}
+                    img_src={tile_data[3]?.thumbnail}
+                    size={tile_size}/>
+                <TileSlot 
+                    index={4}
+                    img_src={tile_data[4]?.thumbnail}
+                    size={tile_size}/>
             </div>
             <div className="tile_grid_row">
-                <TileSlot img_src={tile_data[5]?.thumbnail} size={tile_size}/>
-                <TileSlot img_src={tile_data[6]?.thumbnail} size={tile_size}/>
+                <TileSlot 
+                    index={5}
+                    img_src={tile_data[5]?.thumbnail}
+                    size={tile_size}/>
+                <TileSlot 
+                    index={6}
+                    img_src={tile_data[6]?.thumbnail}
+                    size={tile_size}/>
             </div>
         </div>
     );

@@ -1,20 +1,30 @@
+import { useDroppable } from '@dnd-kit/core';
+
 interface TileSlotProps {
-  size?: number;
-  fill?: string;
-  stroke?: string;
-  onClick?: () => void;
-  img_src?: string | null;
-  img_size?: number;
+    index: number;
+    size?: number;
+    fill?: string;
+    over_fill?: string;
+    stroke?: string;
+    onClick?: () => void;
+    img_src?: string | null;
+    img_size?: number;
 };
 
 export const TileSlot: React.FC<TileSlotProps> = ({
+    index,
     size = 164,
     fill = "#ccc",
+    over_fill = "#cfc",
     stroke = "black",
     onClick,
     img_src,
     img_size = 1.0, // image is 50% of hex width
 }) => {
+    const { isOver, setNodeRef } = useDroppable({
+        id: `tile_slot_${index}`,
+    });
+
     const diag_h = 0.25; // 0.2887 0.5size*tan(pi/6) // ugh, they aren't regular hexagons
     const x_pad = 0.07 * size; // the src images have some left and right padding
 
@@ -36,30 +46,34 @@ export const TileSlot: React.FC<TileSlotProps> = ({
     const img_y = (h - img_h) / 2;
 
     return (
-        <svg
-            width={size}
-            height={h}
-            viewBox={`0 0 ${size} ${h}`}
-            style={{ display: "block", cursor: "pointer" }}
+        <div 
+            ref={setNodeRef}
             onClick={onClick}
-            role="button"
-            tabIndex={0}
-            onKeyDown={(e) => {
-                if (e.key === "Enter" || e.key === " ") onClick?.();
-            }}
-            aria-label="Hex button"
         >
-            <polygon points={points} fill={fill} stroke={stroke} strokeWidth="4" />
+            <svg
+                width={size}
+                height={h}
+                viewBox={`0 0 ${size} ${h}`}
+                style={{ display: "block", cursor: "pointer" }}
+                role="button"
+                tabIndex={0}
+                onKeyDown={(e) => {
+                    if (e.key === "Enter" || e.key === " ") onClick?.();
+                }}
+                aria-label="Hex button"
+            >
+                <polygon points={points} fill={isOver ? over_fill : fill} stroke={stroke} strokeWidth="4" />
 
-            <image
-                href={img_src ? img_src : undefined}
-                x={img_x}
-                y={img_y}
-                width={img_w}
-                height={img_h}
-                preserveAspectRatio="xMidYMid meet"
-                clipPath="url(#clip)"
-            />
-        </svg>
+                <image
+                    href={img_src ? img_src : undefined}
+                    x={img_x}
+                    y={img_y}
+                    width={img_w}
+                    height={img_h}
+                    preserveAspectRatio="xMidYMid meet"
+                    clipPath="url(#clip)"
+                />
+            </svg>
+        </div>
     );
 }

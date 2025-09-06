@@ -3,6 +3,11 @@
   padding: 0;
 }
 
+.tile_options {
+    display: flex;
+    gap: 4px;
+}
+
 .tile_option__small {
     width: 64px;
     height: 64px;

@@ -1,11 +1,25 @@
 //import reactLogo from './assets/react.svg'
 //import viteLogo from '/vite.svg'
 import './App.css'
+import { useState } from 'react';
 import { tile_icon_path, TileTypeEnum } from './tiles';
+import type { TileType } from './tiles';
 import { TileOption } from './components/TileOption';
 import { TileGrid } from './components/TileGrid';
+import { DndContext, DragOverlay } from '@dnd-kit/core';
 
 function App() {
+
+    const [_dragId, setDragId] = useState<string | null>(null);
+    const [grid, setGrid] = useState<(TileType | null)[]>([
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+    ]);
 
     const tiles = Object.values(TileTypeEnum).map((tile) => ({
         tile_type: tile,
@@ -14,17 +28,57 @@ function App() {
 
     const images = tiles.map((tile) => {
         return (
-            <TileOption thumbnail={tile.thumbnail} tile_type={tile.tile_type} class_name="tile_option__small" />
+            <TileOption
+                key={tile.tile_type}
+                thumbnail={tile.thumbnail}
+                tile_type={tile.tile_type}
+                class_name="tile_option__small"
+            />
         );
     });
 
     return (
-        <>
-            {
-                ...images
-            }
-            <TileGrid tile_names={[null, "WONDER", "CAMPUS"]}/>
-        </>
+        <DndContext
+            onDragStart={(event) => {
+                setDragId(event.active.id as string);
+            }}
+            onDragEnd={(data) => {
+                setDragId(null);
+                console.log(data);
+                if (data.over) {
+                    const tile_type = data.active.id as unknown as TileType;
+                    const id = data.over.id as unknown as string;
+                    // Not great, would be better if we could include the grid index in event data
+                    const grid_index_str = id.split("_");
+                    const grid_index = parseInt(grid_index_str[grid_index_str.length -1]);
+                    console.log(grid_index);
+                    const new_grid = [...grid];
+                    new_grid[grid_index] = tile_type;
+                    setGrid(new_grid);
+                }
+
+            }}
+        >
+            <div className="tile_options">
+                {
+                    ...images
+                }
+            </div>
+            <TileGrid tile_names={grid}/>
+        {
+            /*
+            <DragOverlay>
+                {dragId ? (
+                    <TileOption
+                        thumbnail={tile_icon_path(dragId as unknown as TileType)}
+                        tile_type={dragId}
+                        class_name="tile_option__small"
+                    />
+                ) : null}
+            </DragOverlay>
+            */
+        }
+        </DndContext>
     )
 }
 
