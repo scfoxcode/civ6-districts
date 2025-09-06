@@ -12,7 +12,6 @@ export interface TileGridProps {
 }
 
 // Control based on browser size
-
 function calc_tile_size(): number {
     if (window.innerWidth > 1000) {
         return 220;

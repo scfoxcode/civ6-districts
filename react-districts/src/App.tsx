@@ -1,16 +1,13 @@
-//import reactLogo from './assets/react.svg'
-//import viteLogo from '/vite.svg'
 import './App.css'
 import { useState } from 'react';
 import { tile_icon_path, TileTypeEnum } from './tiles';
 import type { TileType } from './tiles';
 import { TileOption } from './components/TileOption';
 import { TileGrid } from './components/TileGrid';
-import { DndContext, DragOverlay } from '@dnd-kit/core';
+import { DndContext } from '@dnd-kit/core';
 
 function App() {
 
-    const [_dragId, setDragId] = useState<string | null>(null);
     const [grid, setGrid] = useState<(TileType | null)[]>([
         null,
         null,
@@ -45,11 +42,7 @@ function App() {
 
     return (
         <DndContext
-            onDragStart={(event) => {
-                setDragId(event.active.id as string);
-            }}
             onDragEnd={(data) => {
-                setDragId(null);
                 if (data.over) {
                     const tile_type = data.active.id as unknown as TileType;
                     const id = data.over.id as unknown as string;
@@ -73,19 +66,6 @@ function App() {
                     clear_tile={(index: number) => set_tile_at_index(index, null)}
                 />
             </div>
-        {
-            /*
-            <DragOverlay>
-                {dragId ? (
-                    <TileOption
-                        thumbnail={tile_icon_path(dragId as unknown as TileType)}
-                        tile_type={dragId}
-                        class_name="tile_option__small"
-                    />
-                ) : null}
-            </DragOverlay>
-            */
-        }
         </DndContext>
     )
 }
