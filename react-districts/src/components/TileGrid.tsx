@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { tile_icon_path } from '../tiles';
+import { calculate_bonus, tile_icon_path } from '../tiles';
 import type { TileType } from '../tiles';
 import { TileSlot } from './TileSlot';
 
@@ -25,6 +25,7 @@ function calc_tile_size(): number {
 export const TileGrid: React.FC<TileGridProps> = (props) => {
 
     const [tile_size, set_tile_size] = useState(calc_tile_size());
+    const [bonuses, setBonuses] = useState([0, 0, 0, 0, 0, 0, 0]);
 
     useEffect(() => {
         const handle_resize = () => {
@@ -38,6 +39,12 @@ export const TileGrid: React.FC<TileGridProps> = (props) => {
         }
 
     }, []);
+
+    useEffect(() => {
+        const grid_cells = [...Array(7).keys()];
+        const new_bonuses = grid_cells.map((index) => calculate_bonus(index, props.tile_names));
+        setBonuses(new_bonuses);
+    }, [props.tile_names]);
 
     const tile_data = props.tile_names.map((name) => {
         if (!name) {
@@ -58,35 +65,51 @@ export const TileGrid: React.FC<TileGridProps> = (props) => {
                 <TileSlot 
                     index={0}
                     img_src={tile_data[0]?.thumbnail}
-                    size={tile_size}/>
+                    size={tile_size}
+                    bonus={bonuses[0]}
+                />
+
                 <TileSlot 
                     index={1}
                     img_src={tile_data[1]?.thumbnail}
-                    size={tile_size}/>
+                    size={tile_size}
+                    bonus={bonuses[1]}
+                />
+
             </div>
             <div className="tile_grid_row">
                 <TileSlot 
                     index={2}
                     img_src={tile_data[2]?.thumbnail}
-                    size={tile_size}/>
+                    size={tile_size}
+                    bonus={bonuses[2]}
+                />
                 <TileSlot 
                     index={3}
                     img_src={tile_data[3]?.thumbnail}
-                    size={tile_size}/>
+                    size={tile_size}
+                    bonus={bonuses[3]}
+                />
                 <TileSlot 
                     index={4}
                     img_src={tile_data[4]?.thumbnail}
-                    size={tile_size}/>
+                    size={tile_size}
+                    bonus={bonuses[4]}
+                />
             </div>
             <div className="tile_grid_row" style={{marginLeft: half_margin}}>
                 <TileSlot 
                     index={5}
                     img_src={tile_data[5]?.thumbnail}
-                    size={tile_size}/>
+                    size={tile_size}
+                    bonus={bonuses[5]}
+                />
                 <TileSlot 
                     index={6}
                     img_src={tile_data[6]?.thumbnail}
-                    size={tile_size}/>
+                    size={tile_size}
+                    bonus={bonuses[6]}
+                />
             </div>
         </div>
     );

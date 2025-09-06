@@ -9,6 +9,7 @@ interface TileSlotProps {
     onClick?: () => void;
     img_src?: string | null;
     img_size?: number;
+    bonus: number;
 };
 
 export const TileSlot: React.FC<TileSlotProps> = ({
@@ -20,6 +21,7 @@ export const TileSlot: React.FC<TileSlotProps> = ({
     onClick,
     img_src,
     img_size = 1.0, // image is 50% of hex width
+    bonus,
 }) => {
     const { isOver, setNodeRef } = useDroppable({
         id: `tile_slot_${index}`,
@@ -45,10 +47,13 @@ export const TileSlot: React.FC<TileSlotProps> = ({
     const img_x = (size - img_w) / 2;
     const img_y = (h - img_h) / 2;
 
+    const hide_bonus = bonus < 0.1 ? " display_none" : "";
+
     return (
         <div 
             ref={setNodeRef}
             onClick={onClick}
+            className="tile_slot"
         >
             <svg
                 width={size}
@@ -74,6 +79,9 @@ export const TileSlot: React.FC<TileSlotProps> = ({
                     clipPath="url(#clip)"
                 />
             </svg>
+            <div className={`tile_slot_bonus_box${hide_bonus}`} >
+                {`+${bonus}`}
+            </div>
         </div>
     );
 }
