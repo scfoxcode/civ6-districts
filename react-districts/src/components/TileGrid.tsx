@@ -8,6 +8,7 @@ import { TileSlot } from './TileSlot';
 
 export interface TileGridProps {
     tile_names: (TileType | null)[];
+    clear_tile(index: number): void;
 }
 
 // Control based on browser size
@@ -67,6 +68,7 @@ export const TileGrid: React.FC<TileGridProps> = (props) => {
                     img_src={tile_data[0]?.thumbnail}
                     size={tile_size}
                     bonus={bonuses[0]}
+                    onClick={() => props.clear_tile(0)}
                 />
 
                 <TileSlot 
@@ -74,6 +76,7 @@ export const TileGrid: React.FC<TileGridProps> = (props) => {
                     img_src={tile_data[1]?.thumbnail}
                     size={tile_size}
                     bonus={bonuses[1]}
+                    onClick={() => props.clear_tile(1)}
                 />
 
             </div>
@@ -83,18 +86,21 @@ export const TileGrid: React.FC<TileGridProps> = (props) => {
                     img_src={tile_data[2]?.thumbnail}
                     size={tile_size}
                     bonus={bonuses[2]}
+                    onClick={() => props.clear_tile(2)}
                 />
                 <TileSlot 
                     index={3}
                     img_src={tile_data[3]?.thumbnail}
                     size={tile_size}
                     bonus={bonuses[3]}
+                    onClick={() => props.clear_tile(3)}
                 />
                 <TileSlot 
                     index={4}
                     img_src={tile_data[4]?.thumbnail}
                     size={tile_size}
                     bonus={bonuses[4]}
+                    onClick={() => props.clear_tile(4)}
                 />
             </div>
             <div className="tile_grid_row" style={{marginLeft: half_margin}}>
@@ -103,12 +109,14 @@ export const TileGrid: React.FC<TileGridProps> = (props) => {
                     img_src={tile_data[5]?.thumbnail}
                     size={tile_size}
                     bonus={bonuses[5]}
+                    onClick={() => props.clear_tile(5)}
                 />
                 <TileSlot 
                     index={6}
                     img_src={tile_data[6]?.thumbnail}
                     size={tile_size}
                     bonus={bonuses[6]}
+                    onClick={() => props.clear_tile(6)}
                 />
             </div>
         </div>

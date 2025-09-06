@@ -21,6 +21,12 @@ function App() {
         null,
     ]);
 
+    const set_tile_at_index = (index: number, tile: TileType | null) => {
+        const new_grid = [...grid];
+        new_grid[index] = tile;
+        setGrid(new_grid);
+    }
+
     const tiles = Object.values(TileTypeEnum).map((tile) => ({
         tile_type: tile,
         thumbnail: tile_icon_path(tile),
@@ -50,9 +56,8 @@ function App() {
                     // Not great, would be better if we could include the grid index in event data
                     const grid_index_str = id.split("_");
                     const grid_index = parseInt(grid_index_str[grid_index_str.length -1]);
-                    const new_grid = [...grid];
-                    new_grid[grid_index] = tile_type;
-                    setGrid(new_grid);
+
+                    set_tile_at_index(grid_index, tile_type);
                 }
 
             }}
@@ -63,7 +68,10 @@ function App() {
                 }
             </div>
             <div className="tile_grid">
-                <TileGrid tile_names={grid}/>
+                <TileGrid
+                    tile_names={grid}
+                    clear_tile={(index: number) => set_tile_at_index(index, null)}
+                />
             </div>
         {
             /*

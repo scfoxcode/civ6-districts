@@ -37,12 +37,6 @@
     }
 }
 
-/*
-.tile_grid_row:nth-child(odd) {
-    margin-left: 82px;
-}
-*/
-
 .tile_grid_row:not(:first-child) {
     margin-top: -16px;
 }

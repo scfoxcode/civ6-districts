@@ -59,7 +59,7 @@ export const TileSlot: React.FC<TileSlotProps> = ({
                 width={size}
                 height={h}
                 viewBox={`0 0 ${size} ${h}`}
-                style={{ display: "block", cursor: "pointer" }}
+                style={{ display: "block", cursor: "pointer", outlineStyle: "none" }}
                 role="button"
                 tabIndex={0}
                 onKeyDown={(e) => {
