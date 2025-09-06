@@ -30,6 +30,17 @@ export function is_district(tile_type: TileType): boolean {
     ); 
 }
 
+export function is_productive(tile_type: TileType): boolean {
+    return (
+        tile_type == "INDUSTRIAL_ZONE"
+        || tile_type == "CAMPUS"
+        || tile_type == "HARBOR"
+        || tile_type == "THEATER_SQUARE"
+        || tile_type == "HOLY_SITE"
+        || tile_type == "COMMERCIAL_HUB"
+    ); 
+}
+
 // Returns the indices of adjacent nodes for any given index
 // Dumb approach. Not scalable, but I do not plan to scale this
 export function adjacent_for_index(index: number): number[] {
@@ -59,7 +70,7 @@ export function calculate_bonus(index: number, grid: (TileType | null)[]): numbe
     const tile_type = grid[index];
 
     // Early out if empty or not a district 
-    if (!tile_type || !is_district(tile_type)) {
+    if (!tile_type || !is_district(tile_type) || !is_productive(tile_type)) {
         return 0;
     }
 
