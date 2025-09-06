@@ -44,14 +44,12 @@ function App() {
             }}
             onDragEnd={(data) => {
                 setDragId(null);
-                console.log(data);
                 if (data.over) {
                     const tile_type = data.active.id as unknown as TileType;
                     const id = data.over.id as unknown as string;
                     // Not great, would be better if we could include the grid index in event data
                     const grid_index_str = id.split("_");
                     const grid_index = parseInt(grid_index_str[grid_index_str.length -1]);
-                    console.log(grid_index);
                     const new_grid = [...grid];
                     new_grid[grid_index] = tile_type;
                     setGrid(new_grid);
@@ -64,7 +62,9 @@ function App() {
                     ...images
                 }
             </div>
-            <TileGrid tile_names={grid}/>
+            <div className="tile_grid">
+                <TileGrid tile_names={grid}/>
+            </div>
         {
             /*
             <DragOverlay>

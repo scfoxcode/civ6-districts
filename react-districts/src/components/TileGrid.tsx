@@ -25,7 +25,7 @@ export const TileGrid: React.FC<TileGridProps> = (props) => {
     })
 
     return (
-        <div>
+        <div className="tile_grid_inner">
             <div className="tile_grid_row">
                 <TileSlot 
                     index={0}
