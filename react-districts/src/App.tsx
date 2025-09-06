@@ -1,35 +1,31 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
+//import reactLogo from './assets/react.svg'
+//import viteLogo from '/vite.svg'
 import './App.css'
+import { tile_icon_path, TileTypeEnum } from './tiles';
+import { TileOption } from './components/TileOption';
+import { TileGrid } from './components/TileGrid';
 
 function App() {
-  const [count, setCount] = useState(0)
 
-  return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    const tiles = Object.values(TileTypeEnum).map((tile) => ({
+        tile_type: tile,
+        thumbnail: tile_icon_path(tile),
+    }));
+
+    const images = tiles.map((tile) => {
+        return (
+            <TileOption thumbnail={tile.thumbnail} tile_type={tile.tile_type} class_name="tile_option__small" />
+        );
+    });
+
+    return (
+        <>
+            {
+                ...images
+            }
+            <TileGrid tile_names={[null, "WONDER", "CAMPUS"]}/>
+        </>
+    )
 }
 
 export default App
