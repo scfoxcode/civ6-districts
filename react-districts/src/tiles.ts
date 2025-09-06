@@ -15,7 +15,7 @@ export const TileTypeEnum = {
 export type TileType = typeof TileTypeEnum[keyof typeof TileTypeEnum];
 
 export function tile_icon_path(tile: TileType): string {
-    return `/tile_icons/${tile}.png`;
+    return `/civ6/tile_icons/${tile}.png`;
 }
 
 export function is_district(tile_type: TileType): boolean {
