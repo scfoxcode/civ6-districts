@@ -1,8 +1,6 @@
 #root {
     width: 100vw;
     height: 100vh;
-    display: grid;
-    grid-template-rows: auto 1fr;
 }
 
 .tile_options {
@@ -22,11 +20,9 @@
 }
 
 .tile_grid {
-    margin-left: auto;
-    margin-right: auto;
-    min-height: 100%;
+    margin: 50px auto 0 auto;
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     justify-items: center;
     align-items: center;
 }
@@ -39,9 +35,11 @@
     }
 }
 
+/*
 .tile_grid_row:nth-child(odd) {
     margin-left: 82px;
 }
+*/
 
 .tile_grid_row:not(:first-child) {
     margin-top: -16px;

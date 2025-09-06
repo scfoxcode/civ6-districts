@@ -17,9 +17,11 @@ export const TileOption: React.FC<TileOptionsProps> = (props) => {
     } : undefined;
 
     return (
-        <div>
+        <div
+            ref={setNodeRef}
+            style={{"touch-action": "none"}}
+        >
             <img 
-                ref={setNodeRef}
                 style={style}
                 {...listeners}
                 {...attributes}
