@@ -1,79 +1,101 @@
 :root {
-  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
+    font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+    line-height: 1.5;
+    font-weight: 400;
 
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
-
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+    color-scheme: light dark;
+    color: rgba(255, 255, 255, 0.87);
+    background-color: #242424;
 }
 
-a {
-  font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
-}
-a:hover {
-  color: #535bf2;
+:root, html, body {
+    padding: 0;
+    margin: 0;
 }
 
-body {
-  margin: 0;
-  display: flex;
-  place-items: center;
-  min-width: 320px;
-  min-height: 100vh;
+main {
+    width: 100%;
+    height: 100vh;
+    display: grid;
+    /*grid-template-rows: repeat(3, 1fr);*/
+    grid-template-rows: min-content auto auto;
+
+    padding: 0;
+    margin: 0;
 }
 
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
+.tile_options {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 4px;
+    flex-wrap: wrap;
+    padding-top: 16px;
+    padding-bottom: 16px;
+    line-height: 1;
 }
 
-.card {
-  padding: 2em;
+.tile_option__small {
+    position: relative;
+    width: 64px;
+    height: 64px;
+    z-index: 10;
 }
 
-#app {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
+.tile_grid {
+    margin: 30px auto 0 auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
-button {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
-  font-family: inherit;
-  background-color: #1a1a1a;
-  cursor: pointer;
-  transition: border-color 0.25s;
-}
-button:hover {
-  border-color: #646cff;
-}
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
+
+.tile_grid_row {
+    display: flex;
+    * {
+        user-select: none;
+    }
 }
 
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
-  }
-  a:hover {
-    color: #747bff;
-  }
-  button {
-    background-color: #f9f9f9;
-  }
+.tile_grid_row:not(:first-child) {
+    margin-top: -16px;
 }
+
+.tile_slot {
+    position: relative;
+}
+
+.tile_slot_bonus_box {
+    position: absolute;
+    top: 50%;
+    left: 65%;
+    height: auto;
+    padding: 2px 6px;
+    background-color: #fff;
+    border: 4px solid black;
+    border-radius: 4px;
+    box-sizing: border-box;
+    color: #000;
+    z-index: 5;
+}
+
+.display_none {
+    display: none;
+}
+
+.footer {
+    max-width: 450px;
+    margin-left: auto;
+    text-align: center;
+    margin-right: auto;
+    padding: 0 8px 20px 8px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    color: #bbb;
+    font-size: 14px;
+}
+
+
