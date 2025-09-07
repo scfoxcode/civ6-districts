@@ -6,15 +6,7 @@
     import TileGrid from './lib/TileGrid.svelte';
     import Footer from './lib/Footer.svelte';
 
-    const grid: (TileType | null)[] = $state([
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-    ]);
+    const grid: (TileType | null)[] = $state(new Array(7).fill(null));
 
     function clear_tile(index: number) {
         grid[index] = null;

@@ -8,15 +8,7 @@ import { DndContext } from '@dnd-kit/core';
 
 function App() {
 
-    const [grid, setGrid] = useState<(TileType | null)[]>([
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-    ]);
+    const [grid, setGrid] = useState<(TileType | null)[]>(new Array(7).fill(null));
 
     const set_tile_at_index = (index: number, tile: TileType | null) => {
         const new_grid = [...grid];
